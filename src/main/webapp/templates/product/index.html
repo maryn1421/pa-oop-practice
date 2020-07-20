@@ -35,12 +35,13 @@
 </div>
 
 <div class="container">
+    <div th:each="cat,iterStat : ${categories}">
     <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
+        <strong th:text="${cat.name}">Category Title</strong>
     </div>
-
     <div id="products" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
+        <div th:each="prod,iterStat : ${products}">
+            <div th:if="${cat.name} == ${prod.getCategoryName()}">
             <div class="card">
                 <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
                 <div class="card-header">
@@ -58,9 +59,8 @@
             </div>
         </div>
     </div>
-
+   </div>
 </div>
-<div th:text="${categories}">
 </div>
 
 <div th:replace="footer.html :: copy"></div>

@@ -26,8 +26,10 @@ public class Initializer implements ServletContextListener {
         //setting up a new supplier
         Supplier amazon = new Supplier("Amazon", "Digital content and services");
         Supplier microsoft = new Supplier("microsoft", "digital content and services");
+        Supplier sony = new Supplier("sony", "digital content and services");
         supplierDataStore.add(amazon);
         supplierDataStore.add(microsoft);
+        supplierDataStore.add(sony);
         Supplier lenovo = new Supplier("Lenovo", "Computers");
         supplierDataStore.add(lenovo);
 
@@ -43,6 +45,6 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
         productDataStore.add(new Product("Nokia 3310", 100,"USD","The Best cellphone in the world",tablet, amazon));
         productDataStore.add(new Product("XBOX One", 200, "USD", "Microsoft Console", console, microsoft));
-
+        productDataStore.add(new Product("PS5", 800, "USD", "Sony console", console, sony));
     }
 }
