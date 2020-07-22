@@ -29,9 +29,19 @@ function postChat(){
     ajaxPostRequest.open("POST", window.origin + "/order");
     ajaxPostRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     let name = document.getElementById('test').value;
-    console.log(name);
-    ajaxPostRequest.send("name=" + name);
+    if (!validateEmail(name)){
+        alert("invalid email address")
+    }
+    else {
+        console.log(name);
+        ajaxPostRequest.send("name=" + name);
+    }
 }
 
 
 console.log("its working")
+
+function validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
