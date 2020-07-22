@@ -15,16 +15,15 @@
         <h2 class="title">Checkout</h2>
         <div id="order-inputs">
             <label>Name:</label>
-            <input name="name" id="name" placeholder="name" required="required">
+            <input class="order-input" name="name" id="name" placeholder="name" required="required"><br>
             <label>Email:</label>
-            <input name="test" id="test" placeholder="email" type="email" required="required">
+            <input class="order-input" name="email" id="email" placeholder="email" type="email" required="required"><br>
             <label>Address:</label>
-            <input type="text" id="address" required="required">
+            <input class="order-input" id="address" required="required" placeholder="address"><br>
             <label>Zip code:</label>
-            <input type="text" maxlength="4" name="zip-code" id="zip-code" required="required">
+            <input class="order-input" maxlength="4" name="zip-code" id="zip-code" required="required" placeholder="zip code"><br>
             <label>Phone number:</label>
-            <input type="tel" maxlength="11" name="phone-number" id="phone-number" required="required">
-            <button onclick="postChat()" class="button">submit</button>
+            <input class="order-input" type="tel" maxlength="11" name="phone-number" id="phone-number" required="required" placeholder="06201234678"><br>
         </div>
         <div class="payment-method">
             <label for="card" class="method card">
@@ -33,7 +32,7 @@
                     <img src="/static/img/mastercard_logo.png" alt=""/>
                 </div>
 
-                <div class="radio-input">
+                <div class="radio-input" id="card-method">
                     <input id="card" type="radio" name="payment">
                     Pay £340.00 with credit card
                 </div>
@@ -41,7 +40,7 @@
 
             <label for="paypal" class="method paypal">
                 <img src="/static/img/paypal_logo.png" alt=""/>
-                <div class="radio-input">
+                <div class="radio-input" id="paypal-method">
                     <input id="paypal" type="radio" name="payment">
                     Pay £340.00 with PayPal
                 </div>
@@ -72,6 +71,9 @@
                        maxlength="19" placeholder="xxxx xxxx xxxx xxxx">
                 <span class="info">* CVV or CVC is the card security code, unique three digits number on the back of your card separate from its number.</span>
             </div>
+        </div>
+        <div class="button-holder">
+        <button onclick="postChat()" class="btn next-btn">submit</button>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
