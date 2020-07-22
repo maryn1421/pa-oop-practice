@@ -41,7 +41,7 @@
         </ul> <!--end navbar-left -->
 
         <ul class="navbar-right">
-            <li><a onclick="myFunction()" href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">3</span></a></li>
+            <li><a onclick="myFunction()" href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" th:text="${cart.getSize()}"></span></a></li>
         </ul> <!--end navbar-right -->
     </div> <!--end container -->
 </nav>
@@ -50,14 +50,21 @@
 <div class="container">
     <div class="shopping-cart" id="shopping-cart">
         <div class="shopping-cart-header">
-            <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">3</span>
+            <i class="fa fa-shopping-cart cart-icon"></i><span class="badge" th:text="${cart.getSize()}"></span>
             <div class="shopping-cart-total">
                 <span class="lighter-text">Total:</span>
-                <span class="main-color-text">***TotalPrice***</span>
+                <span class="main-color-text" th:text="${cart.getTotal()}"></span>
+                <div class="shopping-cart-items" th:each="item, iterStat : ${cartitems}">
+                    <dl>
+                        <dt class="shopping-cart-items" th:text="${item.getName()}"></dt>
+                        <dd class="shopping-cart-items" th:text="${item.getPrice()}"></dd>
+                        <p class="shopping-cart-items" th:align="left" th:attr="src='/static/img/product_' + ${item.getId()} + '.jpg'"></p>
+                    </dl>
+                </div>
+                <a href="#" class="button">Checkout</a>
             </div>
         </div> <!--end shopping-cart-header -->
 
-        <a href="#" class="button">Checkout</a>
     </div> <!--end shopping-cart -->
 </div> <!--end container -->
 
@@ -75,15 +82,15 @@
             <div class="card">
                 <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
                 <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
+                    <h4 class="card-title" id="prod-name" th:text="${prod.name}">Product name</h4>
+                    <p class="card-text" id="prod-desc" th:text="${prod.description}">Product description... </p>
                 </div>
                 <div class="card-body">
                     <div class="card-text">
-                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                        <p class="lead" id="prod-price" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <a class="btn btn-success" href="#" th:attr="data-id=${prod.getId()}" onclick="addToCart(this)">Add to cart</a>
                     </div>
                 </div>
             </div>
