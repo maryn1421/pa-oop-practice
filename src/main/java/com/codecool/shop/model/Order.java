@@ -11,11 +11,13 @@ public class Order extends BaseModel {
     private Date date;
     private String address;
     private String payMethod;
+    private String email;
     public Order(String name, Date date, String address, String payMethod, String email) {
         super(name);
         this.date = date;
         this.address = address;
         this.payMethod = payMethod;
+        this.email = email;
     }
 
     public Date getDate(){
@@ -43,4 +45,7 @@ public class Order extends BaseModel {
                 strDate);
     }
 
+    public String getEmail() {
+        return email;
+    }
 }
