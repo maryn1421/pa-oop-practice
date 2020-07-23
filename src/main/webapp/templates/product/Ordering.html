@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Ordering</title>
     <script src="/static/js/data_handler.js" defer></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/static/styles/style.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+
     <meta name="robots" content="noindex,follow"/>
 </head>
 <body>
@@ -33,16 +33,14 @@
                 </div>
 
                 <div class="radio-input" id="card-method">
-                    <input id="card" type="radio" name="payment">
-                    Pay £340.00 with credit card
+                    <input id="card" type="radio" name="payment" th:text="${price}">$
                 </div>
             </label>
 
             <label for="paypal" class="method paypal">
                 <img src="/static/img/paypal_logo.png" alt=""/>
                 <div class="radio-input" id="paypal-method">
-                    <input id="paypal" type="radio" name="payment">
-                    Pay £340.00 with PayPal
+                    <input id="paypal" type="radio" name="payment" th:text="${price}">$
                 </div>
             </label>
         </div>

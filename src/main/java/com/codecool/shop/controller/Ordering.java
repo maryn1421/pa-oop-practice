@@ -1,7 +1,9 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.OrderDao;
+import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.OrderDaoMem;
 import com.codecool.shop.dao.implementation.OrderMemoryDaoMem;
 import com.codecool.shop.model.Order;
@@ -27,6 +29,8 @@ public class Ordering extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
+        CartDao cartDaoDataStore = CartDaoMem.getInstance();
+        context.setVariable("price", cartDaoDataStore.getTotal());
         engine.process("product/Ordering.html", context, resp.getWriter());
     }
 

@@ -32,3 +32,12 @@ function postChat(id) {
     // console.log(currentSelection);
 }
 
+//document.getElementById("checkout").addEventListener("click", () => {
+  //  console.log("megy")
+   // redirect();
+//})
+
+
+function redirect() {
+    location.replace(window.origin + "/order")
+}

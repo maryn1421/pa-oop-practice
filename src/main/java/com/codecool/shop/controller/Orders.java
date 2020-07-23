@@ -31,7 +31,6 @@ public class Orders extends HttpServlet {
         if (userName == null) {
             resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath() + "/"));
         }
-
         OrderDaoMem orderDataStore = OrderMemoryDaoMem.getInstance();
         System.out.println(orderDataStore.getAll().size());
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());

@@ -1,5 +1,6 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="utf-8" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!--Latest compiled and minified Popper -->
@@ -18,7 +19,7 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/shoppingcart.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/cart.css" />
-    <script src="static/js/shoppingcart.js"></script>
+    <script src="static/js/shoppingcart.js" defer></script>
 </head>
 
 <nav>
@@ -76,7 +77,7 @@
         </div>
     </div>
 
-    <button class="checkout">Checkout</button>
+    <a class="checkout" id="checkout" href="/order" >Checkout</a>
 
 </div>
 </html>
