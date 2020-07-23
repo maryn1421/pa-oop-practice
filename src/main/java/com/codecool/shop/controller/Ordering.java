@@ -3,7 +3,9 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.implementation.OrderDaoMem;
+import com.codecool.shop.dao.implementation.OrderMemoryDaoMem;
 import com.codecool.shop.model.Order;
+import com.codecool.shop.model.OrderMemory;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -30,13 +32,13 @@ public class Ordering extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        System.out.println("request: " + request.getParameter("name") + "  " + request.getParameter("address"));
+       // System.out.println("request: " + request.getParameter("name") + "  " + request.getParameter("address"));
        // confirmationEmail(request.getParameter("email"));
        // confirmationEmail("zolnaimaryn1421@gmail.com");
-        OrderDao orderDataStore = OrderDaoMem.getInstance();
+        OrderDaoMem orderDataStore = OrderMemoryDaoMem.getInstance();
         Date date = new Date();
         orderDataStore.add(new Order(request.getParameter("name"), date, request.getParameter("address"), request.getParameter("paymethod")));
-        System.out.println(orderDataStore.getAll().size());
+        //System.out.println(orderDataStore.getAll().size());
 
     }
 

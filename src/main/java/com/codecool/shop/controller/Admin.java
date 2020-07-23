@@ -1,8 +1,12 @@
 package com.codecool.shop.controller;
 
 
+import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.implementation.OrderDaoMem;
+import com.codecool.shop.dao.implementation.OrderMemoryDaoMem;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.WebContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +19,11 @@ import java.io.IOException;
 public class Admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        OrderDao orderDataStore = OrderDaoMem.getInstance();
-        System.out.println(orderDataStore.getAll());
+        OrderDaoMem orderDataStore = OrderMemoryDaoMem.getInstance();
+        System.out.println(orderDataStore.getAll().size());
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+        WebContext context = new WebContext(req, resp, req.getServletContext());
+        context.setVariable("orders", orderDataStore.getAll());
+        engine.process("product/admin.html", context, resp.getWriter());
     }
     }

@@ -63,6 +63,7 @@ function postChat() {
       //  console.log(email);
        ajaxPostRequest.send("email=" + email + "&name="+ name + "&zipcode=" + zipCode + "&phonenumber=" + phoneNumber +"&" +
             "address=" + address + "&paymethod=" + currentSelection);
+       orderCompleted();
        // console.log(currentSelection);
     }
 }
@@ -70,6 +71,12 @@ function postChat() {
 //			ajaxPostRequest.send("name=" + name + "&message=" + message);
 
 console.log("its working")
+
+
+function orderCompleted() {
+    document.getElementById("checkout-panel").innerHTML = "";
+
+}
 
 function validLength(info) {
     return info.length > 1;
