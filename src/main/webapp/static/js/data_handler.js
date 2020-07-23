@@ -10,7 +10,6 @@ document.getElementById("paypal-method").addEventListener("click", function () {
 })
 
 
-
 function api_post(url, data) {
     // it is not called from outside
     // sends the data to the API, and calls callback function
@@ -50,21 +49,18 @@ function postChat() {
         alert("invalid email address")
     } else if (!validLength(name)) {
         alert("Invalid name, please try again!!")
-    }else if (!zipCodeTest(zipCode)) {
+    } else if (!zipCodeTest(zipCode)) {
         alert("Invalid Zip code, please try again!!")
-        }
-    else if (!phoneNumberTest(phoneNumber)) {
+    } else if (!phoneNumberTest(phoneNumber)) {
         alert("invalid phone number, please try again!!")
-    }
-    else if (!validLength(address)){
+    } else if (!validLength(address)) {
         alert("invalid address, please try again!!")
-    }
-     else {
-      //  console.log(email);
-       ajaxPostRequest.send("email=" + email + "&name="+ name + "&zipcode=" + zipCode + "&phonenumber=" + phoneNumber +"&" +
+    } else {
+        //  console.log(email);
+        ajaxPostRequest.send("email=" + email + "&name=" + name + "&zipcode=" + zipCode + "&phonenumber=" + phoneNumber + "&" +
             "address=" + address + "&paymethod=" + currentSelection);
-       orderCompleted();
-       // console.log(currentSelection);
+        orderCompleted();
+        // console.log(currentSelection);
     }
 }
 
@@ -74,7 +70,18 @@ console.log("its working")
 
 
 function orderCompleted() {
-    document.getElementById("checkout-panel").innerHTML = "";
+    let checkOutPanel = document.getElementById("checkout-panel");
+    checkOutPanel.innerHTML = "";
+    const orderCompletedString = `<div>Thanks for your order, check your email for the order confirmation,
+ if you have any question/issue feel free to contact us.
+ <div class="back-btn-box"><button class="back-btn" onclick="redirect()">Back</button></div></div>`
+    checkOutPanel.insertAdjacentHTML("beforeend", orderCompletedString);
+
+
+}
+
+function redirect() {
+    location.replace(window.origin)
 
 }
 
@@ -87,8 +94,7 @@ function phoneNumberTest(number) {
     if (number.length === 11) {
         const re = /^\d+$/;
         return re.test(String(number));
-    }
-    else {
+    } else {
         return false;
     }
 

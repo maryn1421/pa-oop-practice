@@ -11,7 +11,7 @@ public class Order extends BaseModel {
     private Date date;
     private String address;
     private String payMethod;
-    public Order(String name, Date date, String address, String payMethod) {
+    public Order(String name, Date date, String address, String payMethod, String email) {
         super(name);
         this.date = date;
         this.address = address;

@@ -1,6 +1,9 @@
 package com.codecool.shop.config;
 
+import com.codecool.shop.dao.implementation.OrderDaoMem;
+import com.codecool.shop.dao.implementation.OrderMemoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
+import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -23,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-@WebServlet("/categories")
+@WebServlet("/orders")
 public class Categories extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -35,20 +38,20 @@ public class Categories extends HttpServlet {
             HttpServletRequest request,
             HttpServletResponse response) throws IOException {
 
-        ProductCategoryDaoMem productCategoryDaoMem = ProductCategoryDaoMem.getInstance();
-        List<ProductCategory> categories = productCategoryDaoMem.getAll();
-        JSONObject obj = new JSONObject();
-        System.out.println(categories);
 
-        for (int i = 0; i < categories.size() ; i++) {
+        OrderDaoMem orderDataStore = OrderMemoryDaoMem.getInstance();
+        System.out.println(orderDataStore.getAll().size());
+        List<Order> orders = orderDataStore.getAll();
+        JSONObject obj = new JSONObject();
+
+        for (int i = 0; i < orders.size() ; i++) {
             try {
-                obj.put(String.valueOf(i),categories.get(i));
+                obj.put(String.valueOf(i),orders.get(i));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
        System.out.println(obj);
-
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

@@ -37,7 +37,7 @@ public class Ordering extends HttpServlet {
        // confirmationEmail("zolnaimaryn1421@gmail.com");
         OrderDaoMem orderDataStore = OrderMemoryDaoMem.getInstance();
         Date date = new Date();
-        orderDataStore.add(new Order(request.getParameter("name"), date, request.getParameter("address"), request.getParameter("paymethod")));
+        orderDataStore.add(new Order(request.getParameter("name"), date, request.getParameter("address"), request.getParameter("paymethod"), request.getParameter("email")));
         //System.out.println(orderDataStore.getAll().size());
 
     }

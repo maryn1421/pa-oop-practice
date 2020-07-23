@@ -309,6 +309,7 @@ input[type='password']:focus {
 .back-btn {
     color: #f62f5e;
     background: #fff;
+    border: #f62f5e;
 }
 
 .next-btn {
@@ -330,5 +331,8 @@ input[type='password']:focus {
 }
 
 .button-holder {
+    text-align: center;
+}
+.back-btn-box {
     text-align: center;
 }
