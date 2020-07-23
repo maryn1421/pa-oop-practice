@@ -1,0 +1,84 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+
+
+    <link rel="stylesheet" type="text/css" href="/static/css/shoppingcart.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/cart.css" />
+    <script src="static/js/shoppingcart.js" defer></script>
+    <script src="static/js/cart.js" defer></script>
+</head>
+
+<nav>
+    <div class="container">
+        <ul class="navbar-left">
+            <li><a href="/">Home</a></li>
+            <li><a href="#about">About</a></li>
+        </ul> <!--end navbar-left -->
+
+        <ul class="navbar-right">
+            <li><a onclick="myFunction()" href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span id="cart-size-1" class="badge" th:text="${cart.getSize()}"></span></a></li>
+        </ul> <!--end navbar-right -->
+    </div> <!--end container -->
+</nav>
+
+<h1>Shopping Cart</h1>
+
+<div class="shopping-cart">
+
+    <div class="column-labels">
+        <label class="product-image">Image</label>
+        <label class="product-details">Product</label>
+        <label class="product-price">Price</label>
+        <label class="product-quantity">Remove</label>
+        <label class="product-removal">Remove</label>
+        <label class="product-line-price">Total</label>
+    </div>
+
+    <div class="product" th:each="item, iterStat : ${cartitems}">
+        <div class="product-image">
+            <img th:attr="src='/static/img/product_' + ${item.getId()} + '.jpg'">
+        </div>
+        <div class="product-details">
+            <div class="product-title" th:text="${item.getName()}"></div>
+            <p class="product-description" th:text="${item.getDescription()}"></p>
+        </div>
+        <div class="product-price" th:text="${item.getPrice()}"></div>
+        <div class="product-removal">
+            <button class="remove-product" th:attr="data-id=${item.getId()}" onclick="removeFromCart(this)">
+                Remove
+            </button>
+        </div>
+        <div class="product-line-price" th:text="${item.getPrice()}"></div>
+    </div>
+
+
+    <div class="totals">
+        <div class="totals-item">
+            <label>Shipping</label>
+            <div class="totals-value" id="cart-shipping">FREE</div>
+        </div>
+        <div class="totals-item totals-item-total">
+            <label>Grand Total</label>
+            <div class="totals-value" id="cart-total" th:text="${cart.getTotal()}"></div>
+        </div>
+    </div>
+
+    <a class="checkout" id="checkout" href="/order" >Checkout</a>
+
+</div>
+</html>
