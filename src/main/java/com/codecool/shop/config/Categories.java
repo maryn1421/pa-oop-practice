@@ -9,6 +9,7 @@ import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-@WebServlet("/orders")
+@WebServlet("/categories")
 public class Categories extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -44,13 +45,13 @@ public class Categories extends HttpServlet {
         List<Order> orders = orderDataStore.getAll();
         JSONObject obj = new JSONObject();
 
-        for (int i = 0; i < orders.size() ; i++) {
+        orders.forEach(order -> {
             try {
-                obj.put(String.valueOf(i),orders.get(i));
+                obj.put("name", order.getName());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
+        });
        System.out.println(obj);
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
