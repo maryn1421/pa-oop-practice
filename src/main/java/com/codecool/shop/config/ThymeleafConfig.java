@@ -19,6 +19,7 @@ public class ThymeleafConfig implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         TemplateEngine engine = templateEngine(sce.getServletContext());
         TemplateEngineUtil.storeTemplateEngine(sce.getServletContext(), engine);
+
     }
 
     @Override

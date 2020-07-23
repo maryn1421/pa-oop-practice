@@ -19,32 +19,23 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/"})
-public class ProductController extends HttpServlet {
-    int categoryId = 1;
+@WebServlet(urlPatterns = "/supplier")
+public class SupplierController extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(req.getParameter("category-options") != null){
-            String optionValue =req.getParameter("category-options");
-            categoryId =Integer.parseInt(optionValue);
-        }
+        String optionValue = req.getParameter("supplier-option");
+        int id = Integer.parseInt(optionValue);
+
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("suppliers", supplierDataStore.getAll());
-        context.setVariable("category", productCategoryDataStore.find(categoryId));
-        context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(categoryId)));
+        context.setVariable("supplier", supplierDataStore.find(id));
         context.setVariable("categories", productCategoryDataStore.getAll());
-         // Alternative setting of the template context
-        // Map<String, Object> params = new HashMap<>();
-        // params.put("category", productCategoryDataStore.find(1));
-        // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-        // context.setVariables(params);
-        engine.process("product/index.html", context, resp.getWriter());
+        context.setVariable("products", productDataStore.getBy(supplierDataStore.find(id)));
+        engine.process("product/sortedBySuppliers.html",context, resp.getWriter());
     }
-
-
 }
