@@ -20,6 +20,7 @@
     <link rel="stylesheet" type="text/css" href="/static/css/shoppingcart.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/cart.css" />
     <script src="static/js/shoppingcart.js" defer></script>
+    <script src="static/js/cart.js" defer></script>
 </head>
 
 <nav>
@@ -30,7 +31,7 @@
         </ul> <!--end navbar-left -->
 
         <ul class="navbar-right">
-            <li><a onclick="myFunction()" href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" th:text="${cart.getSize()}"></span></a></li>
+            <li><a onclick="myFunction()" href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span id="cart-size-1" class="badge" th:text="${cart.getSize()}"></span></a></li>
         </ul> <!--end navbar-right -->
     </div> <!--end container -->
 </nav>
@@ -58,7 +59,7 @@
         </div>
         <div class="product-price" th:text="${item.getPrice()}"></div>
         <div class="product-removal">
-            <button class="remove-product">
+            <button class="remove-product" th:attr="data-id=${item.getId()}" onclick="removeFromCart(this)">
                 Remove
             </button>
         </div>

@@ -25,23 +25,26 @@ import java.util.Properties;
 
 @WebServlet(urlPatterns = {"/order"})
 public class Ordering extends HttpServlet {
+    CartDao cartDaoDataStore = CartDaoMem.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        CartDao cartDaoDataStore = CartDaoMem.getInstance();
+
         context.setVariable("price", cartDaoDataStore.getTotal());
         engine.process("product/Ordering.html", context, resp.getWriter());
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-       // System.out.println("request: " + request.getParameter("name") + "  " + request.getParameter("address"));
-       // confirmationEmail(request.getParameter("email"));
-       // confirmationEmail("zolnaimaryn1421@gmail.com");
+        System.out.println("request: " + request.getParameter("name") + "  " + request.getParameter("address"));
+        confirmationEmail(request.getParameter("email"));
+        confirmationEmail("zolnaimaryn1421@gmail.com");
         OrderDaoMem orderDataStore = OrderMemoryDaoMem.getInstance();
         Date date = new Date();
         orderDataStore.add(new Order(request.getParameter("name"), date, request.getParameter("address"), request.getParameter("paymethod"), request.getParameter("email")));
+        cartDaoDataStore.getCart().clear();
+
         //System.out.println(orderDataStore.getAll().size());
 
     }
@@ -80,7 +83,7 @@ public class Ordering extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
-    }
+}
 
 
 

@@ -62,6 +62,9 @@ public class CartDaoMem implements CartDao {
 
         return totalPrice;
     }
+    public void clearCart(){
+        cart.clear();
+    }
 
     @Override
     public Product find(int id) {

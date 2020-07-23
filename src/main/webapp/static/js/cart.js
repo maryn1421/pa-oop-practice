@@ -14,12 +14,31 @@ function myFunction() {
 function addToCart(d) {
     let productID = d.getAttribute("data-id");
     console.log(productID);
-    let cartSize = document.getElementById("cart-size");
-    let currentSize = parseInt(cartSize.textContent);
     cartSet.add(productID);
+    let cartSize = document.getElementById("cart-size");
     cartSize.textContent = cartSet.size.toString();
-    console.log(currentSize);
     postChat(productID);
+}
+
+
+
+
+function removeFromCart(d) {
+    const id = d.getAttribute("data-id");
+    console.log(cartSet);
+    //cartSet.delete(id);
+    console.log(cartSet);
+    let cartSize = document.getElementById("cart-size-1");
+    const current = cartSize.textContent;
+    let currentInt = parseInt(current);
+    if (currentInt >= 1) {
+        currentInt--;
+    }
+    cartSize.textContent = currentInt.toString();
+    let ajaxPostRequest = new XMLHttpRequest();
+    ajaxPostRequest.open("POST", window.origin + "/remove-item");
+    ajaxPostRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    ajaxPostRequest.send("id=" + id);
 }
 
 
@@ -33,8 +52,8 @@ function postChat(id) {
 }
 
 //document.getElementById("checkout").addEventListener("click", () => {
-  //  console.log("megy")
-   // redirect();
+//  console.log("megy")
+// redirect();
 //})
 
 
