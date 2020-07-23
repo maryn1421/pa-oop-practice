@@ -331,3 +331,59 @@ input[type='password']:focus {
 .back-btn-box {
     text-align: center;
 }
+
+.card
+{
+    width: 400px;
+    height: 550px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.container
+{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.card-text
+{
+    height: 75px;
+    text-align: center;
+}
+
+.card-picture
+{
+    height: 250px;
+    width: 400px;
+    -moz-border-radius-topleft:15px ;
+    -moz-border-radius-topright:15px ;
+}
+
+.card-body
+{
+    width: 400px;
+    height: 250px;
+}
+.footer
+{
+    width: 100%;
+    display: block;
+    background-color: white;
+    text-align: center;
+}
+
+.card-header
+{
+    text-align: center;
+}
+nav .navbar-right
+{
+    float: right;
+}
+.navbar {
+    display: block;
+
+}

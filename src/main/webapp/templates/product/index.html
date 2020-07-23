@@ -48,7 +48,7 @@
 
 <body>
 <nav>
-    <div class="container">
+    <div class="navbar">
         <ul class="navbar-left">
             <li><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
@@ -61,7 +61,7 @@
 </nav>
 
 <div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
+    <IMG src="/static/img/logo.png" height="140px">
 </div>
 
 
@@ -124,14 +124,14 @@
 </form>
 <div class="container">
     <div th:each="cat,iterStat : ${categories}">
-        <div class="card">
+        <div >
             <strong th:text="${cat.name}">Category Title</strong>
         </div>
         <div id="products" class="row">
             <div th:each="prod,iterStat : ${products}">
                 <div th:if="${cat.name} == ${prod.getCategoryName()}">
                     <div class="card">
-                        <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
+                        <img class="card-picture" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
                         <div class="card-header">
                             <h4 class="card-title" th:text="${prod.name}">Product name</h4>
                             <p class="card-text" th:text="${prod.description}">Product description... </p>
@@ -141,7 +141,7 @@
                                 <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                             </div>
                             <div class="card-text">
-                                <a class="btn btn-success" th:attr="data-id=${prod.getId()}" onclick="addToCart(this)">Add to cart</a>
+                                <a class="btn btn-outline-secondary" th:attr="data-id=${prod.getId()}" onclick="addToCart(this)">Add to cart</a>
                             </div>
                         </div>
                     </div>
@@ -151,7 +151,6 @@
     </div>
 </div>
 <div th:replace="footer.html :: copy"></div>
-
 </body>
 <?php
 echo "helloka";
