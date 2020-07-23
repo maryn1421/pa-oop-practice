@@ -19,7 +19,5 @@ public class Cart {
         this.cart.add(product);
     }
 
-    public Cart(List<Product> cart) {
-        this.cart = new ArrayList<>();
-    }
+
 }

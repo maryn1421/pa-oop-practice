@@ -29,7 +29,6 @@ public class CartDaoMem implements CartDao {
 
     @Override
     public void add(Product product) {
-        int productID = product.getId();
         int count = 0;
         for (Product item : cart) {
             if (product.getId() == item.getId()) {
@@ -38,7 +37,7 @@ public class CartDaoMem implements CartDao {
         }
 
         if (count == 0) {
-            product.setId(cart.size() + 1);
+            product.setCartId(cart.size() + 1);
             cart.add(product);
         }
     }
