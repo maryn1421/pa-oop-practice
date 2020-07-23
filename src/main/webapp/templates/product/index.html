@@ -1,18 +1,16 @@
- <!doctype html>
+<!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <meta name="author" content="Codecool" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-
-
     <title>Codecool Shop</title>
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!--Latest compiled and minified Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -43,9 +41,25 @@
         }
     </style>
 
-</head>
+    <link rel="stylesheet" type="text/css" href="/static/css/cart.css" />
+    <script src="static/js/cart.js"></script>
+
+    </head>
 
 <body>
+
+<nav>
+    <div class="container">
+        <ul class="navbar-left">
+            <li><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+        </ul> <!--end navbar-left -->
+
+        <ul class="navbar-right">
+            <li><a href="shoppingcart" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="cart-size" th:text="${cart.getSize()}"></span></a></li>
+        </ul> <!--end navbar-right -->
+    </div> <!--end container -->
+</nav>
 
 <div class="jumbotron text-center">
     <h1>Codecool Shop</h1>
@@ -119,15 +133,15 @@
             <div class="card">
                 <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
                 <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
+                    <h4 class="card-title" id="prod-name" th:text="${prod.name}">Product name</h4>
+                    <p class="card-text" id="prod-desc" th:text="${prod.description}">Product description... </p>
                 </div>
                 <div class="card-body">
                     <div class="card-text">
-                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                        <p class="lead" id="prod-price" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <a class="btn btn-success" th:attr="data-id=${prod.getId()}" onclick="addToCart(this)">Add to cart</a>
                     </div>
                 </div>
             </div>

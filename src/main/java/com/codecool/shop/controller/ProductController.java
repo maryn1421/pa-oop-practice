@@ -1,12 +1,15 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.ProductCategory;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -31,13 +34,17 @@ public class ProductController extends HttpServlet {
         }
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        CartDao cartDaoDataStore = CartDaoMem.getInstance();
+
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
+        context.setVariable("products", productDataStore.getAll());
+        context.setVariable("categories",productCategoryDataStore.getAll());
+        context.setVariable("cart", cartDaoDataStore);
+        context.setVariable("cartitems", cartDaoDataStore.getCart());
         context.setVariable("suppliers", supplierDataStore.getAll());
         context.setVariable("category", productCategoryDataStore.find(categoryId));
-        context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(categoryId)));
-        context.setVariable("categories", productCategoryDataStore.getAll());
          // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
         // params.put("category", productCategoryDataStore.find(1));
