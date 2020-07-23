@@ -36,6 +36,7 @@ public class SupplierController extends HttpServlet{
         context.setVariable("supplier", supplierDataStore.find(id));
         context.setVariable("categories", productCategoryDataStore.getAll());
         context.setVariable("products", productDataStore.getBy(supplierDataStore.find(id)));
+
         engine.process("product/sortedBySuppliers.html",context, resp.getWriter());
     }
 }

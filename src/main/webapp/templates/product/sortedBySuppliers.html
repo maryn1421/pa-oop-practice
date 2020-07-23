@@ -26,6 +26,7 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <script  src="/static/js/GetAndPostApiS.js" defer></script>
 </head>
 
 <body>
@@ -35,33 +36,56 @@
 </div>
 
 
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Sort by
+        <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+        <li class="dropdown-submenu"><a class="test" tabindex="-1">Category<span class="caret"></span></a>
+            <ul class="dropdown-menu" >
+                <form action="/" method="get">
+                    <div class="supplier" th:each="cate, iterStat : ${categories}" >
+                        <li><input type="submit"  tabindex="-1"  th:text="${cate.name}" th:value="${cate.id}" name="category-option"></li>
+                    </div>
+                </form>
+            </ul>
+        </li>
+        <li class="dropdown-submenu" ><a class="test" tabindex="-1">Supplier<span class="caret"></span></a>
+            <ul class="dropdown-menu" >
+                <form action="/supplier" method="get">
+                    <div class="supplier" th:each="sup, iterStat : ${suppliers}" >
+                        <li><input type="submit"  tabindex="-1"  th:text="${sup.name}" th:value="${sup.id}" name="supplier-option"></li>
+                    </div>
+                </form>
+            </ul>
+        </li>
+    </ul>
+</div>
 
 
 
 
-
-<form method="get" action="/">
-    <select class="sort-drop-down-by-category" name="category-options">
-        <div th:each="cate,iterStat : ${categories}">
-            <option th:text="${cate.name}" th:value="${cate.id}"></option>
-            <!--    <a>-->
-            <!--        <button>Sort by category</button>-->
-            <!--    </a>-->
-        </div>
-    </select>
-    <input type="submit" value="Submit">
-</form>
-<form method="get" action="/supplier">
-    <select class="sort-drop-down-by-supplier" name="supplier-options">
-        <div th:each="sup,iterStat : ${suppliers}">
-            <option th:text="${sup.name}" th:value="${sup.id}"></option>
-            <!--    <a>-->
-            <!--        <button>Sort by category</button>-->
-            <!--    </a>-->
-        </div>
-    </select>
-    <input type="submit" value="Submit">
-</form>
+<!--<form method="get" action="/">-->
+<!--    <select class="sort-drop-down-by-category" name="category-option">-->
+<!--        <div th:each="cate,iterStat : ${categories}">-->
+<!--            <option th:text="${cate.name}" th:value="${cate.id}"></option>-->
+<!--            &lt;!&ndash;    <a>&ndash;&gt;-->
+<!--            &lt;!&ndash;        <button>Sort by category</button>&ndash;&gt;-->
+<!--            &lt;!&ndash;    </a>&ndash;&gt;-->
+<!--        </div>-->
+<!--    </select>-->
+<!--    <input type="submit" value="Submit">-->
+<!--</form>-->
+<!--<form method="get" action="/supplier">-->
+<!--    <select class="sort-drop-down-by-supplier" name="supplier-option">-->
+<!--        <div th:each="sup,iterStat : ${suppliers}">-->
+<!--            <option th:text="${sup.name}" th:value="${sup.id}"></option>-->
+<!--            &lt;!&ndash;    <a>&ndash;&gt;-->
+<!--            &lt;!&ndash;        <button>Sort by category</button>&ndash;&gt;-->
+<!--            &lt;!&ndash;    </a>&ndash;&gt;-->
+<!--        </div>-->
+<!--    </select>-->
+<!--    <input type="submit" value="Submit">-->
+<!--</form>-->
 <div class="container">
     <div class="card">
         <strong th:text="${supplier.name}" th:id="${supplier.id}">Category Title</strong>

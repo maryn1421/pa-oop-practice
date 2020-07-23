@@ -25,8 +25,8 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(req.getParameter("category-options") != null){
-            String optionValue =req.getParameter("category-options");
+        if(req.getParameter("category-option") != null){
+            String optionValue =req.getParameter("category-option");
             categoryId =Integer.parseInt(optionValue);
         }
         ProductDao productDataStore = ProductDaoMem.getInstance();
