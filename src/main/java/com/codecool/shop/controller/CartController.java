@@ -26,7 +26,7 @@ public class CartController extends HttpServlet {
 
         Product product = productDataStore.find(id);
         cartDaoDataStore.add(product);
-        System.out.println(product.toString());
+        System.out.println(product.getId());
     }
 
     @Override
