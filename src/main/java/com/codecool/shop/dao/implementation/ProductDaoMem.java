@@ -5,6 +5,7 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import com.google.gson.annotations.Expose;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +14,9 @@ import java.util.stream.Collectors;
 public class ProductDaoMem implements ProductDao {
     private int cartId;
 
-    private List<Product> data = new ArrayList<>();
+    @Expose
     private static ProductDaoMem instance = null;
+    private List<Product> data = new ArrayList<>();
 
     /* A private Constructor prevents any other class from instantiating.
      */

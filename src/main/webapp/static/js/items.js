@@ -17,32 +17,10 @@ function refreshCart(id, items) {
     const cartHolder = document.getElementById("cart-holder");
     //cartHolder.innerHTML = "";
     items.forEach(item => {
-        let split = item.split(" ");
-        let name;
-        let price;
-        switch (split.length) {
-            case 12:
-                name = split[3].slice(0, -1);
-                price = split[5].slice(0, -1)
-                break;
-            case 13:
-                name = split[3] + " " + split[4].slice(0, -1);
-                price = split[6].slice(0, -1)
 
-                break;
-            case 14:
-                name = split[3] + " " + split[4] + " " + split[5].slice(0, -1);
-                price = split[7].slice(0, -1)
-                break;
-        }
-         let obj = {
-             id: split[1].slice(0, -1),
-             name: name,
-             price: parseInt(price)
-        }
-        if (id == (obj.id)) {
-            totalPrice += obj.price;
-            const htmlString = `<div class="cart-item-container"><p>${obj.name}</p><p>${obj.price}</p></div>`;
+        if (id == item.id) {
+            totalPrice += parseInt(item.defaultPrice);
+            const htmlString = `<div class="cart-item-container"><p>${item.name}</p><p>${item.defaultPrice}</p></div>`;
             cartHolder.insertAdjacentHTML("beforeend", htmlString);
         }
     })
