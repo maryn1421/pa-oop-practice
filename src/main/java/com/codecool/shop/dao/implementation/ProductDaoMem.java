@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductDaoMem implements ProductDao {
+    private int cartId;
 
     private List<Product> data = new ArrayList<>();
     private static ProductDaoMem instance = null;
@@ -18,6 +19,7 @@ public class ProductDaoMem implements ProductDao {
     /* A private Constructor prevents any other class from instantiating.
      */
     private ProductDaoMem() {
+
     }
 
     public static ProductDaoMem getInstance() {
@@ -41,6 +43,17 @@ public class ProductDaoMem implements ProductDao {
     @Override
     public void remove(int id) {
         data.remove(find(id));
+    }
+
+    @Override
+    public void setCartId(int id) {
+        this.cartId = id;
+
+    }
+
+    @Override
+    public int getCartId() {
+        return this.cartId;
     }
 
     @Override

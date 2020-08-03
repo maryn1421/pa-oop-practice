@@ -9,16 +9,15 @@
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <!--Latest compiled and minified Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
@@ -26,42 +25,95 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <style>
+        .dropdown-submenu {
+            position: relative;
+        }
+
+        .dropdown-submenu .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -1px;
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/cart.css" />
+    <script src="static/js/cart.js" defer></script>
+    <script src="static/js/items.js" defer></script>
+
+
+
 </head>
 
 <body>
+<nav>
+    <div class="navbar">
+        <ul class="navbar-left">
+            <li><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+        </ul> <!--end navbar-left -->
+
+        <ul class="navbar-right">
+            <li id="cart"><a href="shoppingcart" id="cart-1"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="cart-size" th:text="${cart.getSize()}"></span></a></li>
+        </ul> <!--end navbar-right -->
+    </div> <!--end container -->
+</nav>
+
+<div class="cart-container" id="cart-container">
+    <div class="shopping-cart" id="shopping-cart">
+        <div class="shopping-cart-header">
+            <i class="fa fa-shopping-cart cart-icon"></i><span id="size-cart" class="badge" th:text="${cart.getSize()}"> </span>
+            <div class="shopping-cart-total">
+                <span id="cart-total" class="lighter-text" th:text="${cart.getTotal()}">Total:  </span>
+                <div id="cart-holder">
+                    <div th:each="item, iterStat : ${cartitems}" class="cart-item-container" >
+                        <p th:text="${item.getName()}"> </p><p th:text="${item.getPrice()}"> </p><br>
+                    </div>
+                </div>
+                <div>
+                </div>
+            </div>
+        </div> <!--end shopping-cart-header -->
+    </div> <!--end shopping-cart -->
+</div>
 
 <div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
+    <IMG src="/static/img/logo.png" height="140px">
 </div>
 
 <div class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
-    </div>
-
-    <div id="products" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
-                <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
-                </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
-                    </div>
-                    <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+    <div th:each="cat,iterStat : ${categories}">
+        <div >
+            <strong th:text="${cat.name}">Category Title</strong>
+        </div>
+        <div id="products" class="row">
+            <div th:each="prod,iterStat : ${products}">
+                <div th:if="${cat.name} == ${prod.getCategoryName()}">
+                    <div class="card">
+                        <img class="card-picture" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.getId()} + '.jpg'" alt="" />
+                        <div class="card-header">
+                            <h4 class="card-title" th:text="${prod.getName()}">Product name</h4>
+                            <p class="card-text" th:text="${prod.getDescription()}">Product description... </p>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-text">
+                                <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                            </div>
+                            <div class="card-text">
+                                <a class="btn btn-outline-secondary" th:attr="data-id=${prod.getId()}" onclick="addToCart(this)">Add to cart</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
-<div th:replace="footer.html :: copy"></div>
 
+<div th:replace="footer.html :: copy"></div>
 </body>
+<?php
+echo "helloka";
+?>
 </html>
