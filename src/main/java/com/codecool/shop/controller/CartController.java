@@ -24,6 +24,7 @@ public class CartController extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         CartDao cartDaoDataStore = CartDaoMem.getInstance();
 
+        //Product
         Product product = productDataStore.find(id);
         cartDaoDataStore.add(product);
         System.out.println(product.getId());
