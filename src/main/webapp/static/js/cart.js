@@ -1,4 +1,6 @@
 let cartSet = new Set()
+let currentSize = parseInt(document.getElementById("cart-size").textContent);
+
 
 const cart = document.getElementById("cart");
 cart.addEventListener("mouseover", function () {
@@ -18,8 +20,8 @@ function addToCart(d) {
     if (!cartSet.has(productID)) {
         cartSet.add(productID);
         let cartSize = document.getElementById("cart-size");
-        document.getElementById("size-cart").textContent = cartSet.size.toString();
-        cartSize.textContent = cartSet.size.toString();
+        document.getElementById("size-cart").textContent = (currentSize + cartSet.size).toString();
+        cartSize.textContent = (currentSize + cartSet.size).toString();
         postChat(productID);
     }
 }
