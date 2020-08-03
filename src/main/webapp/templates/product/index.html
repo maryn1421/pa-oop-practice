@@ -10,8 +10,7 @@
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <!--Latest compiled and minified Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -26,9 +25,6 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
-
-    <script  src="/static/js/GetAndPostApiS.js" defer></script>
-
     <style>
         .dropdown-submenu {
             position: relative;
@@ -42,9 +38,12 @@
     </style>
 
     <link rel="stylesheet" type="text/css" href="/static/css/cart.css" />
-    <script src="static/js/cart.js"></script>
+    <script src="static/js/cart.js" defer></script>
+    <script src="static/js/items.js" defer></script>
 
-    </head>
+
+
+</head>
 
 <body>
 <nav>
@@ -55,10 +54,28 @@
         </ul> <!--end navbar-left -->
 
         <ul class="navbar-right">
-            <li><a href="shoppingcart" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="cart-size" th:text="${cart.getSize()}"></span></a></li>
+            <li id="cart"><a href="shoppingcart" id="cart-1"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="cart-size" th:text="${cart.getSize()}"></span></a></li>
         </ul> <!--end navbar-right -->
     </div> <!--end container -->
 </nav>
+
+<div class="cart-container" id="cart-container">
+    <div class="shopping-cart" id="shopping-cart">
+        <div class="shopping-cart-header">
+            <i class="fa fa-shopping-cart cart-icon"></i><span id="size-cart" class="badge" th:text="${cart.getSize()}"> </span>
+            <div class="shopping-cart-total">
+                <span id="cart-total" class="lighter-text" th:text="${cart.getTotal()}">Total:  </span>
+                <div id="cart-holder">
+                <div th:each="item, iterStat : ${cartitems}" class="cart-item-container" >
+                    <p th:text="${item.getName()}"> </p><p th:text="${item.getPrice()}"> </p><br>
+                </div>
+                </div>
+                <div>
+                </div>
+            </div>
+        </div> <!--end shopping-cart-header -->
+    </div> <!--end shopping-cart -->
+</div>
 
 <div class="jumbotron text-center">
     <IMG src="/static/img/logo.png" height="140px">

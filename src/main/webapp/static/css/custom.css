@@ -732,3 +732,19 @@ nav .navbar-right
 {
     width: 1210px;
 }
+.cart-container {
+    text-align: right;
+    position: fixed;
+    display: none;
+    width: 20%;
+    height: auto;
+    top: 85px;
+    right: 1px;
+    z-index: 2;
+    cursor: pointer;
+    background-color: white;
+}
+
+.cart-item-container {
+    text-align: left;
+}

@@ -1,23 +1,27 @@
 let cartSet = new Set()
 
+const cart = document.getElementById("cart");
+cart.addEventListener("mouseover", function () {
+    document.getElementById("cart-container").style.display = "block";
+})
 
-function myFunction() {
-    let x = document.getElementById("shopping-cart");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
-}
+cart.addEventListener("mouseleave", function () {
+    console.log("working")
+    document.getElementById("cart-container").style.display = "none";
+})
+
 
 
 function addToCart(d) {
     let productID = d.getAttribute("data-id");
     console.log(productID);
-    cartSet.add(productID);
-    let cartSize = document.getElementById("cart-size");
-    cartSize.textContent = cartSet.size.toString();
-    postChat(productID);
+    if (!cartSet.has(productID)) {
+        cartSet.add(productID);
+        let cartSize = document.getElementById("cart-size");
+        document.getElementById("size-cart").textContent = cartSet.size.toString();
+        cartSize.textContent = cartSet.size.toString();
+        postChat(productID);
+    }
 }
 
 
@@ -48,6 +52,7 @@ function postChat(id) {
     ajaxPostRequest.open("POST", window.origin + "/shoppingcart");
     ajaxPostRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     ajaxPostRequest.send("id=" + id);
+    loadItems(id);
     // console.log(currentSelection);
 }
 
