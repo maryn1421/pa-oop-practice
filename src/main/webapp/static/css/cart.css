@@ -48,6 +48,11 @@ nav ul li a:hover {
     white-space: nowrap;
 }
 
+#cart-image {
+    max-height: 100px;
+    max-width: 100px;
+}
+
 .cart-icon {
     color: #515783;
     font-size: 24px;

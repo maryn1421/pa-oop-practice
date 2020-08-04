@@ -55,7 +55,9 @@
                 <span id="cart-total" class="lighter-text" th:text="${cart.getTotal()}">Total:  </span>
                 <div id="cart-holder">
                     <div th:each="item, iterStat : ${cartitems}" class="cart-item-container" >
-                        <p th:text="${item.getName()}"> </p><p th:text="${item.getPrice()}"> </p><br>
+                        <img id="cart-image" th:attr="src='/static/img/product_' + ${item.getId()} + '.jpg'" alt=""/>
+                        <p th:text="${item.getName()}"> </p>
+                        <p th:text="${item.getPrice()}"> </p><br>
                     </div>
                 </div>
                 <div>
