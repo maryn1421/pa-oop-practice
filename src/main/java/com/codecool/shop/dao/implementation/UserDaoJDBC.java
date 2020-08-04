@@ -57,7 +57,13 @@ public class UserDaoJDBC implements UserDao {
         rst = stm.executeQuery(sql);
         ArrayList<User> customerList = new ArrayList<>();
         while (rst.next()) {
-            User e = new User(rst.getString("name"), rst.getString("email"), rst.getString("username"), rst.getString("zip_code"), rst.getString("city"), rst.getString("address"), rst.getString("password"));
+            User e = new User(rst.getString("name"),
+                    rst.getString("email"),
+                    rst.getString("username"),
+                    rst.getString("zip_code"),
+                    rst.getString("city"),
+                    rst.getString("address"),
+                    rst.getString("password"));
             e.setId(customerList.size() + 1);
             customerList.add(e);
         }
