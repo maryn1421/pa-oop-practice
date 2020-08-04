@@ -16,7 +16,7 @@ body {
     max-width: 100%;
     box-sizing: border-box;
     padding: 25px;
-    margin: 8% auto 0;
+    margin: auto;
     position: relative;
     z-index: 1;
     border-top: 5px solid grey;
