@@ -1,6 +1,7 @@
 package com.codecool.shop.dao;
 
-import com.codecool.shop.dao.implementation.UserDaoMem;
+import com.codecool.shop.dao.implementation.UserDaoJDBC;
+import com.codecool.shop.model.User;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;
@@ -8,7 +9,9 @@ import java.sql.SQLException;
 
 public class ShopDatabaseManager {
 
-    private UserDaoMem UserDao;
+     UserDaoJDBC userDao;
+
+
 
     private DataSource connect() throws SQLException {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
@@ -30,21 +33,10 @@ public class ShopDatabaseManager {
 
     public void setup() throws SQLException {
         DataSource dataSource = connect();
-        UserDao = new UserDaoMem(dataSource);
+        userDao = new UserDaoJDBC(dataSource);
 
     }
+    public void registerUser(User user){
+        userDao.add(user);
+    }
 }
-
-/*
-CREATE TABLE users (
-                       id serial NOT NULL,
-                       email text,
-                       username text,
-                       name text,
-                       zip_code text,
-                       city text,
-                       address text,
-                       password text,
-                       registration_date timestamp default current_timestamp
-);
- */

@@ -18,11 +18,10 @@ import java.sql.SQLException;
 
 @WebListener
 public class Initializer implements ServletContextListener {
-    ShopDatabaseManager dbManager;
+
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        setupDbManager();
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
@@ -75,8 +74,5 @@ public class Initializer implements ServletContextListener {
      //   productDataStore.add(new Product("Huawei Mate 30", 400, "USD", "Huawei phone", phone, huawei));
     }
 
-    private void setupDbManager() {
-        dbManager = new ShopDatabaseManager();
-        dbManager.setup();
-    }
+
 }
