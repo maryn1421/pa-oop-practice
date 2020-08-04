@@ -2,6 +2,7 @@ package com.codecool.shop.config;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.ShopDatabaseManager;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
@@ -13,12 +14,15 @@ import com.codecool.shop.model.Supplier;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.sql.SQLException;
 
 @WebListener
 public class Initializer implements ServletContextListener {
+    ShopDatabaseManager dbManager;
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        setupDbManager();
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
@@ -69,5 +73,10 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Sony Xperia", 199, "USD", "Sony mobile", phone, sony));
        // productDataStore.add(new Product("Apple Ipad mini 4", 699, "USD", "Apple Ipad", tablet, apple));
      //   productDataStore.add(new Product("Huawei Mate 30", 400, "USD", "Huawei phone", phone, huawei));
+    }
+
+    private void setupDbManager() {
+        dbManager = new ShopDatabaseManager();
+        dbManager.setup();
     }
 }

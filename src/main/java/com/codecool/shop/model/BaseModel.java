@@ -4,7 +4,6 @@ package com.codecool.shop.model;
 import java.lang.reflect.Field;
 
 public class BaseModel {
-
     protected int id;
     protected String name;
     protected String description;
