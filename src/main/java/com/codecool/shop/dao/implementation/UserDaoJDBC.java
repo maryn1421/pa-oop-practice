@@ -10,12 +10,12 @@ import java.util.List;
 
 public class UserDaoJDBC implements UserDao {
     DataSource dataSource;
-    private static UserDaoJDBC instance = null;
     private List<User> users = new ArrayList<>();
 
     public UserDaoJDBC(DataSource dataSource) {
         this.dataSource = dataSource;
     }
+
     @Override
     public void add(User user) {
         System.out.println(user.getZipCode());
@@ -39,17 +39,32 @@ public class UserDaoJDBC implements UserDao {
     }
 
     @Override
-    public User find(int id) {
-        return users.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+    public User find(int id) throws SQLException, ClassNotFoundException {
+        return getAll().stream().filter(t -> t.getId() == id).findFirst().orElse(null);
     }
 
     @Override
-    public void remove(int id) {
+    public void remove(int id) throws SQLException, ClassNotFoundException {
         users.remove(find(id));
     }
 
-    @Override
-    public List<User> getAll() {
-        return users;
+    public List<User> getAll() throws ClassNotFoundException, SQLException {
+        Connection conn = dataSource.getConnection();
+        Statement stm;
+        stm = conn.createStatement();
+        String sql = "Select * From users";
+        ResultSet rst;
+        rst = stm.executeQuery(sql);
+        ArrayList<User> customerList = new ArrayList<>();
+        while (rst.next()) {
+            User e = new User(rst.getString("name"), rst.getString("email"), rst.getString("username"), rst.getString("zip_code"), rst.getString("city"), rst.getString("address"), rst.getString("password"));
+            e.setId(customerList.size() + 1);
+            customerList.add(e);
+        }
+        return customerList;
+    }
+
+    public User getUserByUserName(String name) throws SQLException, ClassNotFoundException {
+        return getAll().stream().filter(t -> t.getName().equals(name)).findFirst().orElse(null);
     }
 }
