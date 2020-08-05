@@ -11,6 +11,7 @@ import org.thymeleaf.context.WebContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,12 +32,22 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String userName = null;
+        Cookie[] cookies = req.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("user")) userName = cookie.getValue();
+            }
+        }
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         CartDao cartDaoDataStore = CartDaoMem.getInstance();
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         context.setVariable("cart", cartDaoDataStore);
         context.setVariable("cartitems", cartDaoDataStore.getCart());
+        if(userName != null) {
+            context.setVariable("username", userName);
+        }
 
         engine.process("product/shoppingcart.html", context, resp.getWriter());
     }

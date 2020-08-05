@@ -77,8 +77,14 @@
             <div class="totals-value" id="cart-total" th:text="${cart.getTotal()}"></div>
         </div>
     </div>
-
-    <a class="checkout" id="checkout" href="/order" >Checkout</a>
+    <div th:if="${username}">
+        <a class="checkout" id="checkout" href="/order" >Checkout</a>
+    </div>
+    <div th:unless="${username}">
+        <a class="checkout" href="/registration">Registration</a>
+        <a class="checkout" href="/login">Login</a>
+    </div>
 
 </div>
+
 </html>

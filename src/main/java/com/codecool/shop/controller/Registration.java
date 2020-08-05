@@ -43,6 +43,8 @@ public class Registration extends HttpServlet {
         }
         User user = new User(name, email, username, zipCode, city, address, password);
         dbManager.registerUser(user);
+        resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath() + "/login"));
+        resp.sendRedirect("/login");
     }
 
     private void setupDbManager() throws SQLException {
