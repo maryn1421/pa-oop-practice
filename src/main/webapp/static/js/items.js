@@ -20,7 +20,7 @@ function refreshCart(id, items) {
 
         if (id == item.id) {
             totalPrice += parseInt(item.defaultPrice);
-            const htmlString = `<div class="cart-item-container"><p>${item.name}</p><p>${item.defaultPrice}</p></div>`;
+            const htmlString = `<div class="cart-item-container"><img id="cart-image" src="/static/img/product_${item.id}.jpg" alt=""/><p>${item.name}</p><p>${item.defaultPrice}</p></div>`;
             cartHolder.insertAdjacentHTML("beforeend", htmlString);
         }
     })

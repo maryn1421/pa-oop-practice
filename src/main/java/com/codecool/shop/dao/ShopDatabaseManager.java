@@ -36,8 +36,7 @@ public class ShopDatabaseManager {
     }
 
     public List<User> getAllUsers() throws SQLException, ClassNotFoundException {
-        List<User> all = userDao.getAll();
-        return all;
+        return userDao.getAll();
     }
     public User getUserById(int id) throws SQLException, ClassNotFoundException {
         return userDao.find(id);
