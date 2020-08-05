@@ -24,6 +24,7 @@ CREATE TABLE orders (
                      id serial NOT NULL,
                      user_id integer,
                      items text,
+                     totalPrice integer,
                      date timestamp default  current_timestamp
 );
 

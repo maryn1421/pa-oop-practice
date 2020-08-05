@@ -1,6 +1,8 @@
 package com.codecool.shop.dao;
 
+import com.codecool.shop.dao.implementation.OrderMemoryDaoJDBC;
 import com.codecool.shop.dao.implementation.UserDaoJDBC;
+import com.codecool.shop.model.Order;
 import com.codecool.shop.model.User;
 import org.postgresql.ds.PGSimpleDataSource;
 
@@ -10,6 +12,7 @@ import java.util.List;
 
 public class ShopDatabaseManager {
      UserDaoJDBC userDao;
+     OrderMemoryDaoJDBC orderDao;
 
     private DataSource connect() throws SQLException {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
@@ -29,6 +32,7 @@ public class ShopDatabaseManager {
     public void setup() throws SQLException {
         DataSource dataSource = connect();
         userDao = new UserDaoJDBC(dataSource);
+        orderDao = new OrderMemoryDaoJDBC(dataSource);
 
     }
     public void registerUser(User user){
@@ -43,6 +47,10 @@ public class ShopDatabaseManager {
     }
     public User getUserByUserName(String name) throws SQLException, ClassNotFoundException {
         return userDao.getUserByUserName(name);
+    }
+
+    public void addOrder(Order order){
+        orderDao.add(order);
     }
 
 }

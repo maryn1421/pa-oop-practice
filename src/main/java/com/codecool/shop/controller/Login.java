@@ -46,14 +46,13 @@ public class Login extends HttpServlet {
                     Cookie loginCookie = new Cookie("user", username);
                     loginCookie.setMaxAge(30 * 60);
                     resp.addCookie(loginCookie);
-                    resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath() + "/"));
-                }else {
-                    resp.sendRedirect(resp.encodeRedirectURL(req.getContextPath() + "/login"));
+                    resp.sendRedirect("/");
                 }
             }
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }
+        resp.sendRedirect("/login");
 
     }
 

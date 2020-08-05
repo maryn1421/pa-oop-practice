@@ -33,22 +33,19 @@ import java.util.Properties;
 public class Ordering extends HttpServlet {
     ShopDatabaseManager dbManager;
     CartDao cartDaoDataStore = CartDaoMem.getInstance();
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String userName = getUserString(req);
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         try {
             setupDbManager();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        String userName = null;
-        Cookie[] cookies = req.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("user")) userName = cookie.getValue();
-            }
-        }
         if(userName != null) {
             try {
                 User user = dbManager.getUserByUserName(userName);
@@ -72,14 +69,44 @@ public class Ordering extends HttpServlet {
         engine.process("product/Ordering.html", context, resp.getWriter());
     }
 
+    private String getUserString(HttpServletRequest req) {
+        String userName = null;
+        Cookie[] cookies = req.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("user")) userName = cookie.getValue();
+            }
+        }
+        return userName;
+    }
+
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
       //  System.out.println("request: " + request.getParameter("name") + "  " + request.getParameter("address"));
       //  confirmationEmail("zolnaimaryn1421@gmail.com");
         OrderDaoMem orderDataStore = OrderMemoryDaoMem.getInstance();
         Date date = new Date();
-        Order order = new Order(request.getParameter("name"), date, request.getParameter("address"), request.getParameter("paymethod"), request.getParameter("email"));
+
+        String userName = getUserString(request);
+        try {
+            setupDbManager();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        User user = null;
+        try {
+            user = dbManager.getUserByUserName(userName);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+
+        Order order = new Order(request.getParameter("name"), date, request.getParameter("address"), request.getParameter("paymethod"), request.getParameter("email"), user , cartDaoDataStore.getCart());
         List<Product> cart = cartDaoDataStore.getCart();
+        dbManager.addOrder(order);
         orderDataStore.add(order);
         confirmationEmail(order, cart);
         cartDaoDataStore.getCart().clear();

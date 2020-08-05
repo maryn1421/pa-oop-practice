@@ -3,6 +3,7 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -15,6 +16,9 @@ public class CartDaoMem implements CartDao {
 
     private List<Product> cart = new ArrayList<>();
     private static CartDaoMem instance = null;
+
+
+
 
     private CartDaoMem() {
 
