@@ -34,7 +34,6 @@ public class Ordering extends HttpServlet {
     ShopDatabaseManager dbManager;
     CartDao cartDaoDataStore = CartDaoMem.getInstance();
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userName = getUserString(req);
@@ -54,10 +53,8 @@ public class Ordering extends HttpServlet {
                 context.setVariable("address", user.getAddress());
                 context.setVariable("city", user.getCity());
                 context.setVariable("zipcode", user.getZipCode());
-            } catch (SQLException throwables) {
+            } catch (SQLException | ClassNotFoundException throwables) {
                 throwables.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
             }
         }
         else {
@@ -92,10 +89,8 @@ public class Ordering extends HttpServlet {
         User user = null;
         try {
             user = dbManager.getUserByUserName(userName);
-        } catch (SQLException throwables) {
+        } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
 
         Order order = new Order(request.getParameter("name"), date, request.getParameter("address"), request.getParameter("paymethod"), request.getParameter("email"), user , cartDaoDataStore.getCart());
@@ -135,14 +130,6 @@ public class Ordering extends HttpServlet {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(email));
             message.setSubject("Order confirmation");
-           /* message.setText(
-                    "Hello " + name+ "! " +
-                    "" +
-                    "Thanks for ordering from our webshop, here is your order confirmation:" +
-                    products.toString() + "" +
-                    "If you have any problems/issues/questions feel free to contact us on this email address: The 2-4-6 webshop team :)"
-            );
-            */
             String content = "<h3>Hello " + name + "! </h3><br>";
             StringBuilder stringBuilder = new StringBuilder();
             cart.forEach(item -> {
@@ -166,8 +153,4 @@ public class Ordering extends HttpServlet {
         dbManager = new ShopDatabaseManager();
         dbManager.setup();
     }
-
 }
-
-
-
