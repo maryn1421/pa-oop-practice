@@ -13,6 +13,7 @@ import org.thymeleaf.context.WebContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +28,13 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String userName = null;
+        Cookie[] cookies = req.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("user")) userName = cookie.getValue();
+            }
+        }
         if(req.getParameter("category-option") != null){
             String optionValue =req.getParameter("category-option");
             categoryId =Integer.parseInt(optionValue);
@@ -44,6 +52,9 @@ public class ProductController extends HttpServlet {
         context.setVariable("cartitems", cartDaoDataStore.getCart());
         context.setVariable("suppliers", supplierDataStore.getAll());
         context.setVariable("category", productCategoryDataStore.find(categoryId));
+        if(userName != null) {
+            context.setVariable("username", userName);
+        }
          // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
         // params.put("category", productCategoryDataStore.find(1));

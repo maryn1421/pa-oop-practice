@@ -36,8 +36,14 @@
     <div class="navbar">
         <ul class="navbar-left">
             <li><a href="#">Home</a></li>
-            <li><a href="/registration">Registration</a></li>
-            <li><a href="/login">Login</a></li>
+            <li th:if="${username}">
+                <a href="/logout">Logout</a>
+                <a th:text="Welcome+ ', ' + ${username}"></a>
+            </li>
+            <li th:unless="${username}">
+                <a href="/registration">Registration</a>
+                <a href="/login">Login</a>
+            </li>
         </ul> <!--end navbar-left -->
 
         <ul class="navbar-right">
