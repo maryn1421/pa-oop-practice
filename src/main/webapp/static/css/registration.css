@@ -52,6 +52,7 @@ body {
     font-size: 12px;
 }
 .form_wrapper .row {
+    justify-content: center;
     margin: 10px -15px;
 }
 .form_wrapper .row > div {
