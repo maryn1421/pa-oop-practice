@@ -53,4 +53,12 @@ public class ShopDatabaseManager {
         orderDao.add(order);
     }
 
+    public List<Order> getAllOrders() throws SQLException {
+        return orderDao.getAll();
+    }
+
+    public List<Order> getOrdersByUsername(String userName) throws SQLException {
+        return orderDao.getOrderByUser(userName);
+    }
+
 }

@@ -82,11 +82,7 @@ public class Ordering extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-      //  System.out.println("request: " + request.getParameter("name") + "  " + request.getParameter("address"));
-      //  confirmationEmail("zolnaimaryn1421@gmail.com");
-        OrderDaoMem orderDataStore = OrderMemoryDaoMem.getInstance();
         Date date = new Date();
-
         String userName = getUserString(request);
         try {
             setupDbManager();
@@ -102,16 +98,11 @@ public class Ordering extends HttpServlet {
             e.printStackTrace();
         }
 
-
-
         Order order = new Order(request.getParameter("name"), date, request.getParameter("address"), request.getParameter("paymethod"), request.getParameter("email"), user , cartDaoDataStore.getCart());
         List<Product> cart = cartDaoDataStore.getCart();
         dbManager.addOrder(order);
-        orderDataStore.add(order);
         confirmationEmail(order, cart);
         cartDaoDataStore.getCart().clear();
-
-        //System.out.println(orderDataStore.getAll().size());
 
     }
 
@@ -131,7 +122,6 @@ public class Ordering extends HttpServlet {
             String test = product.toString();
             products.append(test).append(" ");
         });
-
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
@@ -140,23 +130,33 @@ public class Ordering extends HttpServlet {
                 });
 
         try {
-
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("your_user_name@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(email));
             message.setSubject("Order confirmation");
-            message.setText("Hello " + name+ "! " +
+           /* message.setText(
+                    "Hello " + name+ "! " +
                     "" +
                     "Thanks for ordering from our webshop, here is your order confirmation:" +
                     products.toString() + "" +
                     "If you have any problems/issues/questions feel free to contact us on this email address: The 2-4-6 webshop team :)"
             );
-
+            */
+            String content = "<h3>Hello " + name + "! </h3><br>";
+            StringBuilder stringBuilder = new StringBuilder();
+            cart.forEach(item -> {
+                 stringBuilder.append("<div>").append(item.getName()).append(" ").append(item.getPrice()).append("$").append(" </div>").append("<br>");
+            });
+            content += "<h3>You have ordered the following items: </h3>";
+            content += stringBuilder.toString();
+            content += "<h3> Total price: " + order.getTotalPrice() +"$ </h3><br>";
+            content += "<h4>If you have any questions or problems feel free to contact us :)</h4><br>";
+            content += "<h5>The 2-4-6 Webshop Team</h5>";
+            message.setContent(content
+                    , "text/html;charset=UTF-8");
             Transport.send(message);
-
             System.out.println("Done");
-
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }

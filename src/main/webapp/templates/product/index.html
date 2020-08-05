@@ -38,7 +38,7 @@
             <li><a href="#">Home</a></li>
             <li th:if="${username}">
                 <a href="/logout">Logout</a>
-                <a href="/orders" th:text="Welcome+ ', ' + ${username}"></a>
+                <a>Welcome,  <a href="/orders" th:text="${username}"></a></a>
             </li>
             <li th:unless="${username}">
                 <a href="/registration">Registration</a>
