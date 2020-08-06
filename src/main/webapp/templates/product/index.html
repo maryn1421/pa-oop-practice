@@ -38,16 +38,18 @@
             <li><a href="#">Home</a></li>
             <li th:if="${username}">
                 <a href="/logout">Logout</a>
-                <a>Welcome,  <a href="/orders" th:text="${username}"></a></a>
             </li>
             <li th:unless="${username}">
                 <a href="/registration">Registration</a>
-                <a href="/login">Login</a>
+                <a class="login-text" href="/login">Login</a>
             </li>
         </ul> <!--end navbar-left -->
 
         <ul class="navbar-right">
             <li id="cart"><a href="shoppingcart" id="cart-1"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="cart-size" th:text="${cart.getSize()}"></span></a></li>
+            <li class="welcome-text" th:if="${username}">
+                <a>Welcome,  <a href="/orders" th:text="${username}"></a></a>
+            </li>
         </ul> <!--end navbar-right -->
     </div> <!--end container -->
 </nav>

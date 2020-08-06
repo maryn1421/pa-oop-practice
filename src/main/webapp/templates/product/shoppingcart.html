@@ -23,20 +23,13 @@
     <script src="static/js/cart.js" defer></script>
 </head>
 
-<nav>
-    <div class="container">
-        <ul class="navbar-left">
-            <li><a href="/">Home</a></li>
-            <li><a href="#about">About</a></li>
-        </ul> <!--end navbar-left -->
+<div class="jumbotron text-center">
+    <a href="/">
+        <img src="/static/img/logo.png" height="140px" alt="Home">
+    </a>
+</div>
 
-        <ul class="navbar-right">
-            <li><a onclick="myFunction()" href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cart <span id="cart-size-1" class="badge" th:text="${cart.getSize()}"></span></a></li>
-        </ul> <!--end navbar-right -->
-    </div> <!--end container -->
-</nav>
-
-<h1>Shopping Cart</h1>
+<h1>Your Cart</h1>
 
 <div class="shopping-cart">
 
@@ -70,7 +63,7 @@
     <div class="totals">
         <div class="totals-item">
             <label>Shipping</label>
-            <div class="totals-value" id="cart-shipping">FREE</div>
+            <div class="totals-value" id="cart-shipping">0.00</div>
         </div>
         <div class="totals-item totals-item-total">
             <label>Grand Total</label>

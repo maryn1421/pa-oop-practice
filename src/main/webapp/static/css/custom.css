@@ -101,6 +101,14 @@ body {
     color: #2e2e2e;
 }
 
+.welcome-text {
+    float:left;
+}
+
+.login-text {
+    padding-left: inherit;
+}
+
 /* Progress Bar */
 .progress-bar {
     display: flex;
