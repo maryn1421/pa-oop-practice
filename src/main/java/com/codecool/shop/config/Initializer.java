@@ -59,8 +59,8 @@ public class Initializer implements ServletContextListener {
 
         //setting up products and printing it
         productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Amazon tablet with fantastic price.", tablet, amazon));
-        productDataStore.add(new Product("Lenovo IdeaPad", 479, "USD", "Tablet.", tablet, lenovo));
-        productDataStore.add(new Product("Amazon Fire HD8", 89, "USD", "Amazon's latest Fire HD 8 tablet.", tablet, amazon));
+        productDataStore.add(new Product("Lenovo IdeaPad", 479, "USD", "One of the most powerful tablets.", tablet, lenovo));
+        productDataStore.add(new Product("Samsung Galaxy Tab S6", 429, "USD", "Samsung's latest tablet", tablet, amazon));
         productDataStore.add(new Product("Nokia 3310", 100,"USD","The Best cellphone in the world",phone, nokia));
         productDataStore.add(new Product("XBOX One", 200, "USD", "Microsoft Console", console, microsoft));
         productDataStore.add(new Product("PS5", 800, "USD", "Sony console", console, sony));
