@@ -5,107 +5,41 @@
     <meta name="author" content="Codecool" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>Codecool Shop</title>
+    <title>PA practice</title>
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
 
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <!--Latest compiled and minified Popper -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
-    <link rel="stylesheet" type="text/css" href="/static/css/cart.css" />
-    <script src="static/js/cart.js" defer></script>
-    <script src="static/js/items.js" defer></script>
+    <script src="static/js/exercise.js" defer></script>
 
 </head>
 
 <body>
-<nav>
-    <div class="navbar">
-        <ul class="navbar-left">
-            <li><a href="#">Home</a></li>
-            <li th:if="${username}">
-                <a href="/logout">Logout</a>
-                <a>Welcome,  <a href="/orders" th:text="${username}"></a></a>
-            </li>
-            <li th:unless="${username}">
-                <a href="/registration">Registration</a>
-                <a href="/login">Login</a>
-            </li>
-        </ul> <!--end navbar-left -->
-
-        <ul class="navbar-right">
-            <li id="cart"><a href="shoppingcart" id="cart-1"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="cart-size" th:text="${cart.getSize()}"></span></a></li>
-        </ul> <!--end navbar-right -->
-    </div> <!--end container -->
-</nav>
-
-<div class="cart-container" id="cart-container">
-    <div class="shopping-cart" id="shopping-cart">
-        <div class="shopping-cart-header">
-            <i class="fa fa-shopping-cart cart-icon"></i><span id="size-cart" class="badge" th:text="${cart.getSize()}"> </span>
-            <div class="shopping-cart-total">
-                <span id="cart-total" class="lighter-text" th:text="${cart.getTotal()}">Total:  </span>
-                <div id="cart-holder">
-                    <div th:each="item, iterStat : ${cartitems}" class="cart-item-container" >
-                        <img id="cart-image" th:attr="src='/static/img/product_' + ${item.getId()} + '.jpg'" alt=""/>
-                        <p th:text="${item.getName()}"> </p>
-                        <p th:text="${item.getPrice()}"> </p><br>
-                    </div>
-                </div>
-                <div>
-                </div>
-            </div>
-        </div> <!--end shopping-cart-header -->
-    </div> <!--end shopping-cart -->
-</div>
-
-<div class="jumbotron text-center">
-    <IMG src="/static/img/logo.png" height="140px">
-</div>
-
-<div class="container">
-    <div th:each="cat,iterStat : ${categories}">
-        <div >
-            <strong th:text="${cat.name}">Category Title</strong>
-        </div>
-        <div id="products" class="row">
-            <div th:each="prod,iterStat : ${products}">
-                <div th:if="${cat.name} == ${prod.getCategoryName()}">
-                    <div class="card">
-                        <img class="card-picture" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.getId()} + '.jpg'" alt="" />
-                        <div class="card-header">
-                            <h4 class="card-title" th:text="${prod.getName()}">Product name</h4>
-                            <p class="card-text" th:text="${prod.getDescription()}">Product description... </p>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-text">
-                                <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
-                            </div>
-                            <div class="card-text">
-                                <a class="btn btn-outline-secondary" th:attr="data-id=${prod.getId()}" onclick="addToCart(this)">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div>
+    <div class="next-btn-container">
+        <a class="next-btn">Another one!</a>
     </div>
+    <div class="exercise">
+        <h3 class="title" id="title" th:text="${exercise.getTitle()}"></h3>
+        <p class="question-body" th:text="${exercise.getText()}"></p>
+    </div>
+    <div class="controls">
+        <a  class="button" onClick="stopwatch.start();">Start</a>
+        <a  class="button" onClick="stopwatch.lap();">Lap</a>
+        <a  class="button" onClick="stopwatch.stop();">Stop</a>
+        <a  class="button" onClick="stopwatch.restart();">Restart</a>
+        <a  class="button" onClick="stopwatch.clear();">Clear Laps</a>
+    </div>
+    <div class="stopwatch"></div>
+    <ul class="results"></ul>
 </div>
-
-
 <div th:replace="footer.html :: copy"></div>
 </body>
 <?php
