@@ -9,6 +9,7 @@ class Stopwatch {
     }
 
     reset() {
+        console.log("reset")
         this.times = [ 0, 0, 0 ];
     }
 

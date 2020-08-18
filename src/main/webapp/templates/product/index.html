@@ -18,17 +18,18 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
     <script src="static/js/exercise.js" defer></script>
+    <script src="static/js/items.js" defer></script>
 
 </head>
 
 <body>
 <div>
     <div class="next-btn-container">
-        <a class="next-btn">Another one!</a>
+        <a class="next-btn" id="next-btn">Another one!</a>
     </div>
     <div class="exercise">
         <h3 class="title" id="title" th:text="${exercise.getTitle()}"></h3>
-        <p class="question-body" th:text="${exercise.getText()}"></p>
+        <p class="question-body" id="question-body" th:text="${exercise.getText()}"></p>
     </div>
     <div class="controls">
         <a  class="button" onClick="stopwatch.start();">Start</a>
