@@ -24,6 +24,7 @@ class Stopwatch {
     lap() {
         let times = this.times;
         let li = document.createElement('li');
+        li.classList.add("item")
         li.innerText = this.format(times);
         this.results.appendChild(li);
     }

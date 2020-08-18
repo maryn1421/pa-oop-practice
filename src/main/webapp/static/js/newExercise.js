@@ -22,4 +22,5 @@ function refreshExercise(item) {
     title.textContent = item.title;
     stopwatch.reset();
     stopwatch.print();
+    stopwatch.clear();
 }
