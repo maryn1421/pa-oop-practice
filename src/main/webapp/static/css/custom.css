@@ -1,62 +1,86 @@
-.glyphicon {
-    margin-right:5px;
+html {
+    background: #333;
+    color: #bbb;
+    font-family: Menlo;
 }
-.thumbnail
-{
-    margin-bottom: 20px;
-    padding: 0px;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    border-radius: 0px;
-}
-.thumbnail img
-{
-    margin-top: 10px;
-}
-.item.list-group-item
-{
-    float: none;
+
+.controls {
+    text-align: center;
+    top: 1em;
     width: 100%;
-    background-color: #fff;
-    margin-bottom: 10px;
-}
-.item.list-group-item:nth-of-type(odd):hover,.item.list-group-item:hover
-{
-    background: #428bca;
 }
 
-.item.list-group-item .list-group-image
-{
-    margin-right: 10px;
-}
-.item.list-group-item .thumbnail
-{
-    margin-bottom: 0px;
-}
-.item.list-group-item .caption
-{
-    padding: 9px 9px 0px 9px;
-}
-.item.list-group-item:nth-of-type(odd)
-{
-    background: #eeeeee;
+.button {
+    color: #bbb;
+    font-size: 4vw;
+    margin: 0 0.5em;
+    text-decoration: none;
 }
 
-.item.list-group-item:before, .item.list-group-item:after
-{
-    display: table;
-    content: " ";
+.button:first-child {
+    margin-left: 0;
 }
 
-.item.list-group-item img
-{
-    float: left;
+.button:last-child {
+    margin-right: 0;
 }
-.item.list-group-item:after
-{
-    clear: both;
+
+.button:hover {
+    color: white;
 }
-.list-group-item-text
+
+.stopwatch {
+    font-size: 5vw;
+    line-height: 15vh;
+    text-align: center;
+}
+
+.results {
+    border-color: lime;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.title {
+    text-align: center;
+    font-size: 40px;
+}
+
+.question-body {
+    text-align: center;
+    margin: 20px;
+    font-size: 35px;
+    padding: 10px;
+}
+
+.panel-footer {
+    display: flex;
+    width: 100%;
+    height: 96px;
+    padding: 0 80px;
+    background-color: rgb(239, 239, 239);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer
 {
-    margin: 0 0 11px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    color: white;
+}
+
+.next-btn {
+    font-size: 25px;
+
+}
+
+.next-btn-container {
+    text-align: right;
 }

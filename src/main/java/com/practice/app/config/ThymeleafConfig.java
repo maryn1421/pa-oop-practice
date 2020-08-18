@@ -1,4 +1,4 @@
-package com.codecool.shop.config;
+package com.practice.app.config;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
